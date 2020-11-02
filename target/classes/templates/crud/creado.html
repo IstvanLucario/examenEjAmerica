@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<title>User Created</title>
+</head>
+<body>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3>User Created Successfully!!</h3>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Relocation</th>
+					<th>Phone</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td data-th-text="${usuario.name}"></td>
+					<td data-th-text="${usuario.age}"></td>
+					<td data-th-text="${usuario.relocation}"></td>
+					<td data-th-text="${usuario.phone}"></td>
+					<td data-th-text="${usuario.email}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<a class="btn btn-info" href="/crud"> Go Back</a>
+
+</body>
+</html>

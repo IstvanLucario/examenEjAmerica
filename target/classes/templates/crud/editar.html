@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<title>Update User</title>
+</head>
+<body>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3>Update User</h3>
+		</div>
+		<form action="#" th:action="@{/crud/actualizar}"
+			th:object="${usuario}" method="post">
+			<input type="hidden" id="id" name="id" th:field="*{id}" />
+			<div class="form-group">
+				<label for="name" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="name" id="name"
+						th:field="*{name}" required=" required" readonly="true" />
+					<p typeth:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+						class="atert atert-danger" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="age" class="col-sm-2 control-label">Age</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" name="age" id="age"
+						th:field="*{age}" required=" required" readonly="true" />
+					<p typeth:if="${#fields.hasErrors('age')}" th:errors="*{age}"
+						class="atert atert-danger" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="relocation" class="col-sm-2 control-label">Relocation</label>
+				<div class="col-sm-10">
+					<input type="checkbox" class="form-control" name="relocation"
+						id="relocation" th:field="*{relocation}"
+						th:checked="${relocation}" style="visibility: hidden" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="phone" class="col-sm-2 control-label">Phone</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="phoneOut"
+						id="phoneOut" th:field="*{phoneOut}" required=" required"
+						readonly="true" /> <input type="number" class="form-control"
+						name="phone" id="phone" th:field="*{phone}" required=" required"
+						readonly="true" style="display: none" />
+					<p typeth:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+						class="atert atert-danger" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" name="email" id="email"
+						th:field="*{email}" required=" required" readonly="true" />
+					<p typeth:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+						class="atert atert-danger" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<a th:onclick="'changeVisibility(\''+${id}+'\');'"> <span
+						class="fa-stack"> <i class="glyphicon glyphicon-edit"
+							style="position: relative; left: -50px;"></i>
+					</span>
+					</a>
+				</div>
+			</div>
+			<div clas="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-info"
+						style="display: none; position: relative; left: 100px; top: 16px;"
+						id="btnActualizar">Update</button>
+				</div>
+			</div>
+
+		</form>
+		<div class="col-sm-offset-2 col-sm-10">
+			<a class="btn btn-info" href="/crud"
+				style="position: relative; left: px; top: -18px;"> Go back</a>
+		</div>
+		<label th:text="${usuario.error}" id="error"></label>
+		<script>
+			var labelError = document.getElementById("error").innerText;
+
+			if (labelError != "") {
+				document.getElementById("name").readOnly = false;
+				document.getElementById("age").readOnly = false;
+				document.getElementById("relocation").style.visibility = 'visible'
+				document.getElementById("phone").readOnly = false;
+				document.getElementById("phone").style.display = 'block'
+				document.getElementById("phoneOut").style.display = 'none'
+				document.getElementById("email").readOnly = false;
+				document.getElementById("btnActualizar").style.display = 'block';
+			}
+
+			function changeVisibility() {
+				document.getElementById("name").readOnly = false;
+				document.getElementById("age").readOnly = false;
+				document.getElementById("relocation").style.visibility = 'visible'
+				document.getElementById("phone").readOnly = false;
+				document.getElementById("phone").style.display = 'block'
+				document.getElementById("phoneOut").style.display = 'none'
+				document.getElementById("email").readOnly = false;
+				document.getElementById("btnActualizar").style.display = 'block';
+			}
+		</script>
+</body>
+</html>

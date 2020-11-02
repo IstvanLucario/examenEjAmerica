@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<title>Users</title>
+</head>
+<body>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3>Users</h3>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Email</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+			<input type="hidden" id="suma" name="suma" th:field="*{suma}" />
+				<tr data-th-each="usuario : ${usuarios}">
+					<td data-th-text="${usuario.name}"></td>
+					<td data-th-text="${usuario.age}"></td>
+					<td data-th-text="${usuario.email}"></td>
+					<td><a th:href="@{'/crud/ver/{id}'(id=${usuario.id})}"> <span
+							class="fa-stack"> <i class="glyphicon glyphicon-eye-open"></i>
+						</span>
+					</a></td>
+					<td><a th:href="@{'/crud/borrar/{id}'(id=${usuario.id})}">
+							<span class="fa-stack"> <i
+								class="glyphicon glyphicon-trash"
+								th:data-confirm-delete="|Are you sure you want to delete this user ${usuario.name}?|"
+								onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"></i>
+						</span>
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<a class="btn btn-info" href="/crud/nuevo">New User</a>
+	<a class="btn btn-info" href="/crud/nuevoRamdom">New Ramdom User</a>
+	<form action="#" th:action="@{/crud/borrarTodos}" th:object="${suma}" method="post">
+		<input type="hidden" id="sumao" name="sumao" th:field="*{name}" value="*{name}" />
+		<input type="hidden" name="age" id="age" th:field="*{age}" />
+		<input type="hidden" name="PhoneOut" id="PhoneOut" th:field="*{PhoneOut}" />
+		<button type="submit" th:onclick="'sumaDelete();'" class="btn btn-info" style="position: relative; left: 245px; top: -34px;">Delete All</button>
+    </form>
+
+	<script>
+	
+	var labelError = document.getElementById("error").innerText;
+
+	if (labelError != "") {
+		alert(labelError);
+	}
+	
+	function sumaDelete(){
+			var suma = document.getElementById("sumao").value;
+			var onlySuma=suma.substring(0,3);
+			var onlyRes=suma.substring(3,6);
+			var insum = prompt("what is the plus of : "+onlySuma);
+			
+			 if (insum === null) {
+			        return;
+			    }
+			 if(insum===""){
+				 return;
+			 }
+			document.getElementById("age").value=insum;
+			document.getElementById("PhoneOut").value=onlyRes;
+	}
+	</script>
+	<label th:text="${suma.error}" style="visibility: none;"></label>
+</body>
+</html>
